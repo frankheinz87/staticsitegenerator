@@ -19,7 +19,14 @@ class TestHTMLNode(unittest.TestCase):
     
     def test_leaf_to_html_p(self):
         node = LeafNode("p", "Hello, world!")
+        node1=LeafNode("a","Hello",{"href": "https://www.google.com", "target": "_blank"})
+        node2 = LeafNode(None, "Hello, world!")
+        node3 = LeafNode("p", None)
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
+        self.assertEqual(node1.to_html(), '<a href="https://www.google.com" target="_blank">Hello</a>')
+        self.assertEqual(node2.to_html(), "Hello, world!")
+        with self.assertRaises(ValueError):
+            node3.to_html()
 
         
 
