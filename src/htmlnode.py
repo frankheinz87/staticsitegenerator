@@ -39,3 +39,21 @@ class LeafNode(HTMLNode):
                 return '<'+self.tag+">"+self.value+"</"+self.tag+'>'
             else:    
                 return '<'+self.tag+self.props_to_html()+">"+self.value+"</"+self.tag+'>'
+
+class ParentNode(HTMLNode):
+    def __init__(self, tag , children , props = None):
+        super().__init__(tag, value=None, children=children, props=None)
+
+    def to_html(self):
+        if self.tag==None:
+            raise ValueError
+        elif self.children==None:
+            raise ValueError
+        else:
+            if self.props==None:
+                result='<'+self.tag+">"
+            else:
+                result='<'+self.tag+self.props_to_html()+">"
+            for child in self.children:
+                result+=child.to_html()
+            return result+"</"+self.tag+'>'
