@@ -15,7 +15,7 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_props_to_html(self):
         node3=HTMLNode("p","Hello",[],{"href": "https://www.google.com", "target": "_blank"})
-        print(node3.props_to_html())
+        #print(node3.props_to_html())
     
     def test_leaf_to_html_p(self):
         node = LeafNode("p", "Hello, world!")
