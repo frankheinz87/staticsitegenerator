@@ -6,7 +6,7 @@ from main import text_node_to_html_node
 
 class TestTextNode(unittest.TestCase):
     def test_text(self):
-        node = TextNode("This is a text node", TextType.NORMAL)
+        node = TextNode("This is a text node", TextType.TEXT)
         node_Bold = TextNode("This is a bold text node", TextType.BOLD)
         node_Italic = TextNode("This is an italic text node", TextType.ITALIC)
         node_Code = TextNode("This is a code text node", TextType.CODE)
