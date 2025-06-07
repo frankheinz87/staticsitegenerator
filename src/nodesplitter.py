@@ -29,18 +29,18 @@ def split_nodes_image(old_nodes):
         if images==None or images==[]:
             new_nodes.append(node)
             continue
-        for i in range(len(images)):
-            split_node=node.text.split(f"![{images[i][0]}]({images[i][1]})",1)
+        for image in images:
+            split_node=node.text.split(f"![{image[0]}]({image[1]})",1)
             
             
             if split_node[0]!="":
                 new_nodes.append(TextNode(split_node[0],TextType.TEXT))
-            new_nodes.append(TextNode(images[i][0],TextType.IMAGE,images[i][1]))
+            new_nodes.append(TextNode(image[0],TextType.IMAGE,image[1]))
             if split_node[1]!="":
                 node=TextNode(split_node[1],TextType.TEXT)
             
-        #if node.text!="":
-         #   new_nodes.append(TextNode(node.text,TextType.TEXT))
+        if split_node[1]!="":
+            new_nodes.append(TextNode(split_node[1],TextType.TEXT))
     return new_nodes
 
 def split_nodes_link(old_nodes):
@@ -53,15 +53,15 @@ def split_nodes_link(old_nodes):
         if links==None or links==[]:
             new_nodes.append(node)
             continue
-        for i in range(len(links)):
-            split_node=node.text.split(f"[{links[i][0]}]({links[i][1]})",1)
+        for link in links:
+            split_node=node.text.split(f"[{link[0]}]({link[1]})",1)
 
             if split_node[0]!="":
                 new_nodes.append(TextNode(split_node[0],TextType.TEXT))
-            new_nodes.append(TextNode(links[i][0],TextType.LINK,links[i][1]))
+            new_nodes.append(TextNode(link[0],TextType.LINK,link[1]))
             if split_node[1]!="":
                 node=TextNode(split_node[1],TextType.TEXT)
             
-        #if node.text!="":
-         #   new_nodes.append(TextNode(node.text,TextType.TEXT))
+        if split_node[1]!="":
+            new_nodes.append(TextNode(split_node[1],TextType.TEXT))
     return new_nodes
