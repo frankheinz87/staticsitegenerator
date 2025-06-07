@@ -55,7 +55,7 @@ class TestTextNode(unittest.TestCase):
                                                                                 TextNode("in the end a ", TextType.TEXT),
                                                                                 TextNode("bolded phrase", TextType.BOLD),
                                                                                 ])
-        print(split_nodes_delimiter([node_Bold_Start,node_Bold_End],"**",TextType.BOLD))
+        
         with self.assertRaises(Exception):
             split_nodes_delimiter([node_Bold_Exception],"**",TextType.BOLD)
         
