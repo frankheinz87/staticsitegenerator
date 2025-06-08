@@ -5,8 +5,7 @@ from nodesplitter import split_nodes_delimiter,split_nodes_image,split_nodes_lin
 def main():
     Hello=TextNode("Hello World", TextType.LINK, "https://www.boot.dev" )
     Hello2=HTMLNode("p","Hello",[],{"href": "https://www.google.com", "target": "_blank"})
-    #print(Hello)
-    #print(Hello2)
+    
 
 def text_to_textnodes(text):
     old_nodes=[TextNode(text,TextType.TEXT)]
