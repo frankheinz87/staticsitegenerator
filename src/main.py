@@ -1,11 +1,21 @@
 from textnode import TextNode,TextType
 from htmlnode import HTMLNode,ParentNode,LeafNode
+from nodesplitter import split_nodes_delimiter,split_nodes_image,split_nodes_link
 
 def main():
     Hello=TextNode("Hello World", TextType.LINK, "https://www.boot.dev" )
     Hello2=HTMLNode("p","Hello",[],{"href": "https://www.google.com", "target": "_blank"})
     #print(Hello)
     #print(Hello2)
+
+def text_to_textnodes(text):
+    old_nodes=[TextNode(text,TextType.TEXT)]
+    step_bold=split_nodes_delimiter(old_nodes,"**",TextType.BOLD)
+    step_italic=split_nodes_delimiter(step_bold,"_",TextType.ITALIC)
+    step_code=split_nodes_delimiter(step_italic,"`",TextType.CODE)
+    step_image=split_nodes_image(step_code)
+    step_link=split_nodes_link(step_image)
+    return step_link
 
 def text_node_to_html_node(text_node):
     if text_node.text_type not in TextType:
