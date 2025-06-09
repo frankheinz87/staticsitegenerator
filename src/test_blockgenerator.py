@@ -11,11 +11,11 @@ class TestBlockGen(unittest.TestCase):
                                                        """- This is the first list item in a list block\n- This is a list item\n- This is another list item""",
                                                        ])
     
-    def test_markdown_to_blocks(self):
+    def test_markdown_to_blocks1(self):
         md = """
         This is **bolded** paragraph
         
-        
+
         This is another paragraph with _italic_ text and `code` here
         This is the same paragraph on a new line
         
