@@ -7,6 +7,8 @@ from markdownblock import BlockType
 from htmlnode import HTMLNode,LeafNode,ParentNode
 from textnode import TextNode,TextType
 
+import re
+
 def markdown_to_html_node(markdown):
     blocks=markdown_to_blocks(markdown)
     HTMLNodes=[]
@@ -21,6 +23,34 @@ def markdown_to_html_node(markdown):
         elif block_type[0]==BlockType.PARAGRAPH:
             new_block=block.replace("\n"," ")
             HTMLNodes.append(ParentNode(block_type_to_tag(block_type),text_to_children(new_block)))
+        elif block_type[0]==BlockType.HEADING:
+            HTMLNodes.append(ParentNode(block_type_to_tag(block_type),text_to_children(block.lstrip("#").strip())))
+        elif block_type[0] == BlockType.UNORDERED_LIST:
+            # Split into individual list items
+            lines = block.split('\n')
+            list_items = []
+            for line in lines:
+                # Remove the "- " prefix and create <li> node
+                item_text = line.lstrip('- ').strip()
+                li_node = ParentNode("li", text_to_children(item_text))
+                list_items.append(li_node)
+            
+            HTMLNodes.append(ParentNode(block_type_to_tag(block_type), list_items))
+        elif block_type[0] == BlockType.ORDERED_LIST:
+            # Split into individual list items
+            lines = block.split('\n')
+            list_items = []
+            for line in lines:
+                # Remove pattern like "1. " or "23. " from the start
+                item_text = re.sub(r'^\d+\.\s*', '', line)
+                li_node = ParentNode("li", text_to_children(item_text))
+                list_items.append(li_node)
+            
+            HTMLNodes.append(ParentNode(block_type_to_tag(block_type), list_items))
+        elif block_type[0]==BlockType.QUOTE:
+            lines = block.split("\n")
+            quote_text=" ".join(line.lstrip("> ") for line in lines)
+            HTMLNodes.append(ParentNode(block_type_to_tag(block_type), text_to_children(quote_text)))
         else:
             HTMLNodes.append(ParentNode(block_type_to_tag(block_type),text_to_children(block)))
     return ParentNode("div",HTMLNodes)

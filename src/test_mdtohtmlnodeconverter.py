@@ -33,6 +33,58 @@ class TestMDConverter(unittest.TestCase):
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+    
+    def test_heading(self):
+        md = """
+        ### This is a Level 3 heading
+        """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><h3>This is a Level 3 heading</h3></div>",
+        )
+
+    def test_unordered_list(self):
+        md = """
+        - first item
+        - second item
+        - third item
+        """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ul><li>first item</li><li>second item</li><li>third item</li></ul></div>",
+        )
+
+    def test_ordered_list(self):
+        md = """
+        1. first item
+        2. second item
+        3. third item
+        """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol><li>first item</li><li>second item</li><li>third item</li></ol></div>",
+        )
+
+    def test_blockquote(self):
+        md = """
+        > blockquote
+        """
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><blockquote>blockquote</blockquote></div>",
+        )
 
 if __name__ == "__main__":
     unittest.main()
