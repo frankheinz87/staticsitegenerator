@@ -23,23 +23,23 @@ class TestBlockConv(unittest.TestCase):
         true_ordered_list="1. first list item\n2. second list item\n3. third list item"
         false_ordered_list="2. first list item\n1.second list item\n3 third list item"
 
-        self.assertEqual(block_to_block_type(heading1),BlockType.HEADING)
-        self.assertEqual(block_to_block_type(heading2),BlockType.HEADING)
-        self.assertEqual(block_to_block_type(heading3),BlockType.HEADING)
-        self.assertEqual(block_to_block_type(heading4),BlockType.HEADING)
-        self.assertEqual(block_to_block_type(heading5),BlockType.HEADING)
-        self.assertEqual(block_to_block_type(heading6),BlockType.HEADING)
+        self.assertEqual(block_to_block_type(heading1),[BlockType.HEADING,1])
+        self.assertEqual(block_to_block_type(heading2),[BlockType.HEADING,2])
+        self.assertEqual(block_to_block_type(heading3),[BlockType.HEADING,3])
+        self.assertEqual(block_to_block_type(heading4),[BlockType.HEADING,4])
+        self.assertEqual(block_to_block_type(heading5),[BlockType.HEADING,5])
+        self.assertEqual(block_to_block_type(heading6),[BlockType.HEADING,6])
 
-        self.assertEqual(block_to_block_type(code),BlockType.CODE)
+        self.assertEqual(block_to_block_type(code),[BlockType.CODE])
 
-        self.assertEqual(block_to_block_type(true_quote),BlockType.QUOTE)
-        self.assertEqual(block_to_block_type(false_quote),BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(true_quote),[BlockType.QUOTE])
+        self.assertEqual(block_to_block_type(false_quote),[BlockType.PARAGRAPH])
 
-        self.assertEqual(block_to_block_type(true_unordered_list),BlockType.UNORDERED_LIST)
-        self.assertEqual(block_to_block_type(false_unordered_list),BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(true_unordered_list),[BlockType.UNORDERED_LIST])
+        self.assertEqual(block_to_block_type(false_unordered_list),[BlockType.PARAGRAPH])
 
-        self.assertEqual(block_to_block_type(true_ordered_list),BlockType.ORDERED_LIST)
-        self.assertEqual(block_to_block_type(false_ordered_list),BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(true_ordered_list),[BlockType.ORDERED_LIST])
+        self.assertEqual(block_to_block_type(false_ordered_list),[BlockType.PARAGRAPH])
 
 
 

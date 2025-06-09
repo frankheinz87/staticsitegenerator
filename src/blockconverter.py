@@ -5,14 +5,15 @@ def block_to_block_type(block):
     lines=block.splitlines()
        
     if any(block.startswith(h) for h in heading_id):
-        return BlockType.HEADING
+        h=block.count("#",0,6)
+        return [BlockType.HEADING,h]
     elif block.startswith("```") and block.endswith("```"):
-        return BlockType.CODE
+        return [BlockType.CODE]
     elif all(line.startswith(">") for line in lines):
-        return BlockType.QUOTE
+        return [BlockType.QUOTE]
     elif all(line.startswith("- ") for line in lines):
-        return BlockType.UNORDERED_LIST
+        return [BlockType.UNORDERED_LIST]
     elif all(line.startswith(f"{idx+1}. ") for idx,line in enumerate(lines)):
-        return BlockType.ORDERED_LIST
+        return [BlockType.ORDERED_LIST]
     else:
-        return BlockType.PARAGRAPH
+        return [BlockType.PARAGRAPH]
