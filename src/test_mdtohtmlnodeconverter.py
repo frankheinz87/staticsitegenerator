@@ -76,14 +76,18 @@ class TestMDConverter(unittest.TestCase):
 
     def test_blockquote(self):
         md = """
-        > blockquote
+        > This is a
+        > blockquote block
+
+        > this is another
+        > blockquote block
         """
 
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><blockquote>blockquote</blockquote></div>",
+            "<div><blockquote>This is a blockquote block</blockquote><blockquote>this is another blockquote block</blockquote></div>",
         )
 
 if __name__ == "__main__":
