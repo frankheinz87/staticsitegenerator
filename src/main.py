@@ -1,12 +1,14 @@
 from textnode import TextNode,TextType
 from htmlnode import HTMLNode,ParentNode,LeafNode
+from pagegenerator import generate_page
 import os
 import shutil
 
 def main():
-    Hello=TextNode("Hello World", TextType.LINK, "https://www.boot.dev" )
-    Hello2=HTMLNode("p","Hello",[],{"href": "https://www.google.com", "target": "_blank"})
+    empty_destdir("public")
     file_preparation("static","public")
+    generate_page("content/index.md","template.html","public/index.html")
+    
 
 def file_preparation(sourcedir,destdir):
     dest_list=os.listdir(destdir)
