@@ -33,5 +33,5 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path,base
             html_dest_path=dest_path.rstrip(".md")+".html"
             generate_page(content_path,template_path,html_dest_path,basepath)                  
         else:
-            generate_pages_recursive(content_path,template_path,dest_path)
+            generate_pages_recursive(content_path,template_path,dest_path,basepath)
     
