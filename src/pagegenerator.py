@@ -9,12 +9,12 @@ def generate_page(from_path, template_path, dest_path):
     with open(template_path) as t:
         template_data=t.read()
     
-    Node=markdown_to_html_node(read_data)
-    String=Node.to_html()
-    Title=extract_title(read_data)
-    final_data=template_data.replace("{{ Title }}",Title).replace("{{ Content }}", String)
+    node=markdown_to_html_node(read_data)
+    html=node.to_html()
+    title=extract_title(read_data)
+    final_data=template_data.replace("{{ Title }}",title).replace("{{ Content }}", html)
     #creating target file
-    #os.makedirs(dest_path)
-    with open(dest_path,"x") as final:
+    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    with open(dest_path,"w") as final:
         final.write(final_data)
     
